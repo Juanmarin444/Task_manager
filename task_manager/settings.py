@@ -36,7 +36,10 @@ CSRF_COOKIE_SECURE = True
 
 SESSION_COOKIE_SECURE = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = [
+    'radiant-peak-63085',
+    '127.0.0.1',
+]
 
 # Application definition
 
