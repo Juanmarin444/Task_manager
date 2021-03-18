@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+{% load tz_detect %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Success</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'users_tasks/css/styles.css' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Eczar:wght@800&family=Montserrat&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="container">
+      <h1>Hello, {{user.name}}!</h1>
+      <div id="user_messages">
+        {% if messages %}
+          <ul class="messages">
+            {% for message in messages %}
+              <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div> <!-- user_messages -->
+      <div id="today_appointments">
+          <h3>Today's appointments: {% now "jS \o\f F Y" %} (TESTING PURPOSES) {% now "SHORT_DATETIME_FORMAT" %}</h3>
+        {% for x in appointment %}
+          <div class="task_container">
+            <div class="task_details">
+              <label>Task</label>
+              <p>{{x.task}}</p>
+            </div>
+            <div class="task_details">
+              <label>Time</label>
+              <p>{{x.time}}</p>
+            </div>
+            <div class="task_details">
+              <label>Status</label>
+              <p>{{x.status}}</p>
+            </div>
+            <div class="task_details">
+              <label>Actions</label>
+              <div class="actions">
+                <a href="/edit/{{x.id}}">Edit</a>
+                <a href="/delete/{{x.id}}">: Delete</a>
+                <!-- {% if x.status != "Done" %} -->
+                  <!-- <a href="/delete/{{x.id}}">: Delete</a> -->
+                <!-- {{else}} -->
+                  <!-- {{continue}} -->
+                <!-- {% endif %} -->
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <div id="pending_tasks">
+        <h3>Your Other Appointments</h3>
+        {% for x in other_appointments %}
+          <div class="task_container">
+            <div class="task_details">
+              <label>Task</label>
+              <p>{{x.task}}</p>
+            </div>
+            <div class="task_details">
+              <label>Date</label>
+              <p>{{x.date}}</p>
+            </div>
+            <div class="task_details">
+              <label>Time</label>
+              <p>{{x.time}}</p>
+            </div>
+            <div class="task_details">
+              <label>Actions</label>
+              <div class="actions">
+                <a href="/edit/{{x.id}}">Edit</a>
+                <a href="/delete/{{x.id}}">: Delete</a>
+                <!-- {% if x.status != "Done" %} -->
+                <!-- <a href="/delete/{{x.id}}">: Delete</a> -->
+                <!-- {{else}} -->
+                  <!-- {{continue}} -->
+                <!-- {% endif %} -->
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <div id="adding_appointments">
+        <h3>Add an Appointment</h3>
+        <div id="adding_form">
+          <form action='add/appointment' method='POST'>
+            {% csrf_token %}
+            <div class="form_elements">
+              <label class="form_label" for="date">Date</label>
+              <div class="input_wrapper">
+                <input class="input_date" type='date' name='date'>
+              </div>
+            </div>
+            <div class="form_elements">
+              <label class="form_label" for="time">Time</label>
+              <div class="input_wrapper">
+                <input class="input_date" type='time' name='time'>
+              </div>
+            </div>
+            <div class="form_elements">
+              <label class="form_label" for="task">Task</label>
+              <div class="input_wrapper">
+                <input type='text' name='task'>
+              </div>
+            </div>
+            <input class="submit_btn" type='submit' value='Add'>
+          </form>
+        </div>
+        <div id="sign_out">
+          <form action="/logout" method="post">
+            {% csrf_token %}
+            <input class="submit_btn" type="submit" value="Sign Out">
+          </form>
+        </div>
+      </div>
+    </div> <!-- container -->
+    {% load tz_detect %}
+    {% tz_detect %}
+  </body>
+</html>

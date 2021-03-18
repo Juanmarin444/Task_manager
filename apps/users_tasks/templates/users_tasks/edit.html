@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Edit Task</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'users_tasks/css/styles.css' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Eczar:wght@800&family=Montserrat&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="container">
+      <h2>Update your appointment</h2>
+      <div id="user_messages">
+        {% if messages %}
+          <ul class="messages">
+            {% for message in messages %}
+              <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div> <!-- user_messages -->
+      <div id="edit_form">
+        <form action='/update/{{appt_id}}' method='POST'>
+          {% csrf_token %}
+          <div class="form_items">
+            <label for="task">Task</label>
+            <div class="input_wrapper">
+              <input type='text' name='task' value='{{appt.task}}'>
+            </div>
+          </div>
+          <div class="form_items">
+            <label for="status">Status</label>
+            <div class="input_wrapper">
+              <select class="input_date" name='status'>
+                <option value="Pending">Pending</option>
+                <option value="Done">Done</option>
+              </select>
+            </div>
+          </div>
+          <div class="form_items">
+            <label for="date">Date</label>
+            <div class="input_wrapper">
+              <input class="input_date" type='date' name='date' value='{{appt.date}}'>
+            </div>
+          </div>
+          <div class="form_items">
+            <label for="time">Time</label>
+            <div class="input_wrapper">
+              <input class="input_date" type='time' name='time' value='{{appt.time}}'>
+            </div>
+          </div>
+          <input class="submit_btn" type='submit' value='update'>
+        </form>
+      </div>
+      <div class="cancel-btn">
+        <form action="/show" method="post">
+          {% csrf_token %}
+          <input class="submit_btn" type="submit" value="Cancel">
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
