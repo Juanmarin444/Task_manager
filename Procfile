@@ -1,1 +1,1 @@
-web: gunicorn courses.wsgi
+web: gunicorn task_manager.wsgi
