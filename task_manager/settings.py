@@ -37,7 +37,7 @@ CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 
 ALLOWED_HOSTS = [
-    'radiant-peak-63085',
+    'radiant-peak-63085.herokuapp.com',
     '127.0.0.1',
 ]
 
