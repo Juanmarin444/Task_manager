@@ -1,5 +1,5 @@
-<!DOCTYPE html>
 {% load tz_detect %}
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Eczar:wght@800&family=Montserrat&display=swap" rel="stylesheet">
   </head>
   <body>
+    {% tz_detect %}
     <div id="container">
       <h1>Hello, {{user.name}}!</h1>
       <div id="user_messages">
@@ -117,7 +118,5 @@
         </div>
       </div>
     </div> <!-- container -->
-    {% load tz_detect %}
-    {% tz_detect %}
   </body>
 </html>
