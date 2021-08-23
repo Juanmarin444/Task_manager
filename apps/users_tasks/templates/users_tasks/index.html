@@ -2,16 +2,25 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>login | Registration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="A task management app made with django"
+    />
+    <title>Login | Registration - Task Manager</title>
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'users_tasks/css/styles.css' %}">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" type="text/css" href="{% static 'users_tasks/css/index_styles.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Eczar:wght@800&family=Montserrat&display=swap" rel="stylesheet">
   </head>
   <body>
-    <div id="container">
-      <h1 class="main_title">Task Manager</h1>
-      <div id="user_messages">
+    <div class="container">
+      <div class='title_container'>
+        <h1 class="main_title">Task Manager</h1>
+      </div>
+      <div class="user_messages">
         {% if messages %}
           <ul class="messages">
             {% for message in messages %}
@@ -19,63 +28,56 @@
             {% endfor %}
           </ul>
         {% endif %}
-      </div> <!-- user_messages -->
-      <div id="register_form">
-        <h2>Register</h2>
-        <form action='/register' method='post'>
-          {% csrf_token %}
-          <div class="form_items">
-            <label class="form_label" for="name">Name</label>
-            <div class="input_wrapper">
-              <input type="text" name="name" placeholder="Full Name">
-            </div>
-          </div>
-          <div class="form_items">
-            <label class="form_label" for="email">Email</label>
-            <div class="input_wrapper">
-              <input type="text" name="email" placeholder="Email">
-            </div>
-          </div>
-          <div class="form_items">
-            <label class="form_label" for="dob">Date of Birth</label>
-            <div class="input_wrapper">
-              <input class="input_date" type='date' name='dob' placeholder="mm/dd/yyyy">
-            </div>
-          </div>
-          <div class="form_items">
-            <label class="form_label" for="password">Password</label>
-            <div class="input_wrapper">
-              <input type="password" name="password" placeholder="Password">
-            </div>
-          </div>
-          <div class="form_items">
-            <label class="form_label" for="confirm_pw">Confirm Password</label>
-            <div class="input_wrapper">
-              <input type="password" name="confirm_pw" placeholder="Confirm Password">
-            </div>
-          </div>
-          <input class="submit_btn" type='submit' value='Register'>
-        </form>
-      </div> <!-- register_form -->
-      <div id="login_form">
-        <h2>Login</h2>
-        <form action='/login' method='post'>
-          {% csrf_token %}
-          <div class="form_items">
-            <label class="form_label" for="email">Email</label>
-            <div class="input_wrapper">
-              <input type='text' name='email' placeholder="Your Email">
-            </div>
-          </div>
-          <div class="form_items">
-            <label class="form_label" for="password">Password</label>
-            <div class="input_wrapper">
-              <input type='password' name='password' placeholder="Your Password">
-            </div>
-          </div>
-          <input class="submit_btn" type="submit" value="Login">
-        </form>
-      </div> <!-- login_form -->
-    </div> <!-- container -->
+      </div>
+      <div class="forms">
+        <div class="login_form">
+          <h2>Login</h2>
+          <form action='/login' method='post'>
+            {% csrf_token %}
+
+            <label class="form_label" for="email">Email
+              <input type='text' name='email' placeholder="Your Email" />
+            </label>
+
+            <label class="form_label" for="password">Password
+              <input type='password' name='password' placeholder="Your Password" />
+            </label>
+
+            <input type="submit" value="LOGIN" />
+
+          </form>
+        </div>
+        <div class="register_form">
+          <h2>Register</h2>
+
+          <form action='/register' method='post'>
+            {% csrf_token %}
+
+            <label class="form_label" for="name">Name
+              <input type="text" name="name" placeholder="Full Name" />
+            </label>
+
+            <label class="form_label" for="email">Email
+              <input type="email" name="email" placeholder="Email" />
+            </label>
+
+            <label class="form_label" for="dob">Date of Birth
+              <input class="input_date" type='date' name='dob' placeholder="mm/dd/yyyy" />
+            </label>
+
+            <label class="form_label" for="password">Password
+              <input type="password" name="password" placeholder="Password" />
+            </label>
+
+            <label class="form_label" for="confirm_pw">Confirm Password
+              <input type="password" name="confirm_pw" placeholder="Confirm Password" />
+            </label>
+
+            <input type='submit' value='REGISTER' />
+
+          </form>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

@@ -1,19 +1,32 @@
-{% load tz_detect %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Success</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="A task management app made with django"
+    />
+    <title>Welcome - Task Manager</title>
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'users_tasks/css/styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'users_tasks/css/success_styles.css' %}">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Eczar:wght@800&family=Montserrat&display=swap" rel="stylesheet">
   </head>
   <body>
-    {% tz_detect %}
-    <div id="container">
-      <h1>Hello, {{user.name}}!</h1>
-      <div id="user_messages">
+    <div class="container">
+
+      <div class="navbar">
+        <h1>Task Manager</h1>
+        <h1 class="signout" ><a href="/logout">Sign Out</a></h1>
+      </div>
+
+      <div class="welcome_msg">
+        <h1>Hello, {{user.name}}!</h1>
+      </div>
+
+      <div class="user_messages">
         {% if messages %}
           <ul class="messages">
             {% for message in messages %}
@@ -21,102 +34,98 @@
             {% endfor %}
           </ul>
         {% endif %}
-      </div> <!-- user_messages -->
-      <div id="today_appointments">
-          <h3>Today's appointments: {% now "jS \o\f F Y" %} (TESTING PURPOSES) {% now "SHORT_DATETIME_FORMAT" %}</h3>
-        {% for x in appointment %}
-          <div class="task_container">
-            <div class="task_details">
-              <label>Task</label>
-              <p>{{x.task}}</p>
-            </div>
-            <div class="task_details">
-              <label>Time</label>
-              <p>{{x.time}}</p>
-            </div>
-            <div class="task_details">
-              <label>Status</label>
-              <p>{{x.status}}</p>
-            </div>
-            <div class="task_details">
-              <label>Actions</label>
-              <div class="actions">
-                <a href="/edit/{{x.id}}">Edit</a>
-                <a href="/delete/{{x.id}}">: Delete</a>
-                <!-- {% if x.status != "Done" %} -->
-                  <!-- <a href="/delete/{{x.id}}">: Delete</a> -->
-                <!-- {{else}} -->
-                  <!-- {{continue}} -->
-                <!-- {% endif %} -->
-              </div>
-            </div>
+      </div>
+
+      <div class="grid_container">
+
+        <div class="todays_tasks">
+
+          <div class="date">
+            <h3>Today's tasks</h3>
           </div>
-        {% endfor %}
-      </div>
-      <div id="pending_tasks">
-        <h3>Your Other Appointments</h3>
-        {% for x in other_appointments %}
+
           <div class="task_container">
-            <div class="task_details">
-              <label>Task</label>
-              <p>{{x.task}}</p>
+
+            <div class="labels_grid">
+              <p>Task</p>
+              <p>Time</p>
+              <p>Status</p>
+              <P class="action" >Action</P>
             </div>
-            <div class="task_details">
-              <label>Date</label>
-              <p>{{x.date}}</p>
-            </div>
-            <div class="task_details">
-              <label>Time</label>
-              <p>{{x.time}}</p>
-            </div>
-            <div class="task_details">
-              <label>Actions</label>
-              <div class="actions">
-                <a href="/edit/{{x.id}}">Edit</a>
-                <a href="/delete/{{x.id}}">: Delete</a>
-                <!-- {% if x.status != "Done" %} -->
-                <!-- <a href="/delete/{{x.id}}">: Delete</a> -->
-                <!-- {{else}} -->
-                  <!-- {{continue}} -->
-                <!-- {% endif %} -->
+
+            {% for x in appointment %}
+              <div class="tasks_grid">
+                <p>{{x.task}}</p>
+                <p>{{x.time}}</p>
+                <p>{{x.status}}</p>
+                <div class="btn_container">
+                  <a class="button" href="/edit/{{x.id}}">Edit</a>
+                  <a class="button delete" href="/delete/{{x.id}}">Delete</a>
+                </div>
               </div>
-            </div>
+            {% endfor %}
+
           </div>
-        {% endfor %}
-      </div>
-      <div id="adding_appointments">
-        <h3>Add an Appointment</h3>
-        <div id="adding_form">
-          <form action='add/appointment' method='POST'>
-            {% csrf_token %}
-            <div class="form_elements">
-              <label class="form_label" for="date">Date</label>
-              <div class="input_wrapper">
-                <input class="input_date" type='date' name='date'>
-              </div>
-            </div>
-            <div class="form_elements">
-              <label class="form_label" for="time">Time</label>
-              <div class="input_wrapper">
-                <input class="input_date" type='time' name='time'>
-              </div>
-            </div>
-            <div class="form_elements">
-              <label class="form_label" for="task">Task</label>
-              <div class="input_wrapper">
-                <input type='text' name='task'>
-              </div>
-            </div>
-            <input class="submit_btn" type='submit' value='Add'>
-          </form>
+
         </div>
-        <div id="sign_out">
-          <form action="/logout" method="post">
-            {% csrf_token %}
-            <input class="submit_btn" type="submit" value="Sign Out">
-          </form>
+
+        <div class="pending_tasks">
+
+          <div class="date">
+            <h3>Your other tasks</h3>
+          </div>
+
+          <div class="task_container">
+
+            <div class="labels_grid">
+              <p>Task</p>
+              <p>Time</p>
+              <p>Date</p>
+              <P>Action</P>
+            </div>
+
+            {% for x in other_appointments %}
+              <div class="tasks_grid">
+                <p>{{x.task}}</p>
+                <p>{{x.time}}</p>
+                <p>{{x.date}}</p>
+                <div class="btn_container">
+                  <a class="button" href="/edit/{{x.id}}">Edit</a>
+                  <a class="button delete" href="/delete/{{x.id}}">Delete</a>
+                </div>
+              </div>
+            {% endfor %}
+
+          </div>
+
         </div>
+
       </div>
-    </div> <!-- container -->
+
+      <div class="add_tasks">
+        <h2>Add a tasks</h2>
+
+        <form action='add/appointment' method='POST'>
+          {% csrf_token %}
+
+          <label class="form_label" for="date">Date
+            <input type='date' name='date'>
+          </label>
+
+          <label class="form_label" for="time">Time
+            <input type='time' name='time'>
+          </label>
+
+          <label class="form_label" for="task">Task
+            <input type='text' name='task' placeholder="Write a task..." >
+          </label>
+
+          <input type='submit' value='ADD'>
+
+        </form>
+
+      </div>
+
+    </div>
   </body>
 </html>
