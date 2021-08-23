@@ -1,0 +1,133 @@
+* {
+  margin: 0 auto;
+  padding: 0;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  background: #222831;
+  font-size: 1.125rem;
+  font-weight: 300;
+  color: #EEEEEE;
+}
+
+/* ---------- Layout ---------- */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.title_container {
+  padding: 0 1.5rem;
+  text-align: center;
+}
+
+.user_messages {
+  padding: 0 1.5rem;
+}
+
+.forms {
+  display: flex;
+  margin-top: 1.5rem;
+  max-width: 1000px;
+  width: 100%;
+}
+
+.register_form,
+.login_form {
+  background: #00ADB5;
+  border-radius: 10px;
+  color: #393E46;
+  display: flex;
+  flex: .45;
+  flex-direction: column;
+  height: fit-content;
+  padding: 1.5rem;
+}
+
+form input:not(input[type=submit]) {
+  background-color: #EEEEEE;
+  border: none;
+  border-radius: 10px;
+  font-size: .8rem;
+  margin: 8px auto;
+  padding: 12px 20px;
+  width: 100%;
+}
+
+form input[type=submit] {
+  background: #393E46;
+  border: none;
+  border-radius: 10px;
+  color: #EEEEEE;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 15px auto;
+  padding: 12px 25px;
+  width: 100%;
+}
+
+form input[type=submit]:hover {
+  background: #222831;
+  cursor: pointer;
+}
+
+/* ---------- Typography ---------- */
+
+.title_container,
+h2 {
+  font-family: 'Eczar', serif;
+  font-size: 1.5rem;
+}
+
+.messages {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  list-style: none;
+}
+
+form label {
+  font-family: 'Eczar', serif;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1018px) {
+  .forms {
+    flex-direction: column;
+    max-width: 70%;
+  }
+
+  .login_form {
+    margin-bottom: 1rem;
+  }
+
+  .register_form {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+}
+
+@media (max-width: 675px) {
+
+  .forms {
+    max-width: 90%;
+  }
+
+}
+
+/* ---------- Focus ---------- */
+
+input:focus {
+  outline: thick dashed #222831;
+}
+
+input:focus:not(:focus-visible) {
+  outline: none;
+}
