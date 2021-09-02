@@ -2,6 +2,8 @@
 
 Hi! I see you're interested in **Task Manager**. Continue reading if you want to know how this web app was made! :D
 
+![Task Manager GIF](https://juanmarin.netlify.app/static/media/task-manager-demo.442137e6.gif)
+
 You can visit Task Manager [**here**](https://radiant-peak-63085.herokuapp.com/)!
 
 If you want to play with the responsiveness, you can use the developer tools to view the media queries. Also, **if you don't want to create an account** you can log in using John Cena's account!
